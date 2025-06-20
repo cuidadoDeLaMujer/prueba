@@ -15,6 +15,11 @@
             --rosa-hover: #FC68A0;
             --borde-carrusel: #8797b9;
         }
+        html, body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
         body {
             font-family: 'Comfortaa', cursive;
             background: linear-gradient(135deg, var(--celeste-bebe) 0%, var(--rosa-bebe) 100%);
@@ -22,25 +27,25 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
             color: var(--gris-suave);
             text-align: center;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
         }
         .background-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
             background: url('img/fondo_bebes_sutil.png') no-repeat center center / cover;
             opacity: 0.15; filter: blur(5px); z-index: 0;
+            pointer-events: none;
         }
         .main-container {
-            background:  rgba(243, 243, 243, 0.96);
-            padding: 28px 18px 28px 18px;
+            background: rgba(243, 243, 243, 0.96);
+            padding: clamp(16px, 5vw, 36px);
             border-radius: 22px;
             box-shadow: 0 14px 38px rgba(0, 0, 0, 0.09);
-            width: 100%;
-            max-width: 600px;
+            width: 98vw;
+            max-width: 540px;
             position: relative;
             z-index: 1;
             display: flex;
@@ -48,19 +53,21 @@
             align-items: center;
             backdrop-filter: blur(3.5px);
             -webkit-backdrop-filter: blur(3.5px);
+            margin: clamp(10px, 4vw, 40px) auto;
         }
-        /* Carrusel mejorado */
         .carousel-container {
-            width: 310px;
-            height: 160px;
-            margin-bottom: 10px;
+            width: min(92vw, 340px);
+            height: min(38vw, 165px);
+            margin-bottom: clamp(10px, 3vw, 18px);
             border-radius: 15px;
             overflow: hidden;
             position: relative;
-            
-            box-shadow: 0 6px 18px rgb(22, 74, 100);
+            box-shadow: 0 6px 18px rgb(22, 74, 100, 0.16);
             border: 2.5px solid var(--borde-carrusel);
             background: rgba(255,255,255,0.84);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .carousel-slide {
             width: 100%; height: 100%;
@@ -76,6 +83,7 @@
             object-fit: cover;
             object-position: center;
             border-radius: 13px;
+            background: #fff;
         }
         @keyframes fadeIn {
             from { opacity: 0.7; }
@@ -83,27 +91,27 @@
         }
         .main-container h1 {
             font-family: 'Pacifico', cursive;
-            font-size: 2.09em;
-            margin-bottom: 13px;
+            font-size: clamp(1.1em, 3vw, 2.2em);
+            margin-bottom: clamp(7px, 2vw, 18px);
             color: var(--coral);
             line-height: 1.13;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.06);
         }
         .main-container p {
-            font-size: 1.00em;
+            font-size: clamp(0.98em, 2vw, 1.18em);
             line-height: 1.6;
-            margin-bottom: 19px;
+            margin-bottom: clamp(13px, 3vw, 23px);
             color: var(--gris-suave);
-            max-width: 460px;
+            max-width: 97vw;
             font-weight: 500;
         }
         .cta-button {
-            padding: 12px 24px;
+            padding: clamp(7px, 2vw, 14px) clamp(16px, 5vw, 34px);
             background: linear-gradient(45deg, var(--rosa-bebe), var(--rosa-hover));
-            color: #5a2d40;;
+            color: #5a2d40;
             border: none;
             border-radius: 30px;
-            font-size: 1.05em;
+            font-size: clamp(1em, 2.5vw, 1.15em);
             font-weight: 700;
             cursor: pointer;
             transition: all 0.28s;
@@ -115,6 +123,9 @@
             position: relative;
             overflow: hidden;
             margin-bottom: 14px;
+            margin-top: 3px;
+            min-width: 40vw;
+            max-width: 100vw;
         }
         .cta-button::before {
             content: '';
@@ -138,41 +149,33 @@
             box-shadow: 0 2px 8px rgba(255,127,80,0.14);
         }
         .decorative-images {
-            margin-top: 12px;
+            margin-top: clamp(7px, 2vw, 18px);
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: clamp(6px, 2vw, 15px);
             flex-wrap: wrap;
         }
         .decorative-images img {
-            width: 67px; height: 67px;
+            width: clamp(38px, 8vw, 68px);
+            height: clamp(38px, 8vw, 68px);
             object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 2.5px 7px rgba(0,0,0,0.08);
             transition: transform 0.24s;
         }
         .decorative-images img:hover {
-            transform: scale(1.03) rotate(1.5deg);
+            transform: scale(1.04) rotate(1.5deg);
         }
-        /* Responsive */
-        @media (max-width: 600px) {
+        /* Extra: para evitar que el contenido se pegue a los bordes en pantallas muy pequeñas */
+        @media (max-width: 430px) {
             .main-container {
-                padding: 17px 2vw;
-                border-radius: 14px;
-                max-width: 98vw;
-            }
-            .carousel-container {
-                width: 148px;
-                height: 72px;
-                margin-bottom: 11px;
+                padding: 3vw 1vw;
                 border-radius: 10px;
             }
-            .carousel-slide img { border-radius: 8px; }
-            .main-container h1 { font-size: 1.28em; margin-bottom: 9px;}
-            .main-container p { font-size: 0.93em; margin-bottom: 13px; }
-            .cta-button { font-size: 0.98em; padding: 8px 17px; border-radius: 18px;}
-            .decorative-images { gap: 7px; margin-top: 7px;}
-            .decorative-images img { width: 44px; height: 44px; border-radius: 6px;}
+            .carousel-container {
+                border-radius: 7px;
+            }
+            .carousel-slide img { border-radius: 5px; }
         }
     </style>
 </head>
@@ -207,6 +210,11 @@
         <button class="cta-button" onclick="loadMainPage()">
             Explorar Nuestra Página
         </button>
+        <div class="decorative-images">
+            <img src="img/01.png" alt="Decorativo 1">
+            <img src="img/04.png" alt="Decorativo 2">
+            <img src="img/03.png" alt="Decorativo 3">
+        </div>
     </div>
     <script>
         const slides = document.querySelectorAll('.carousel-slide');
