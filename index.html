@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenida a la Dulce Espera</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rosa-bebe: #FFDEE9;
+            --celeste-bebe: #E0F2F7;
+            --blanco-crema: #FFFBFB;
+            --coral: #FF7F50;
+            --gris-suave: #385c6e;
+            --rosa-hover: #FC68A0;
+            --borde-carrusel: #8797b9;
+        }
+        body {
+            font-family: 'Comfortaa', cursive;
+            background: linear-gradient(135deg, var(--celeste-bebe) 0%, var(--rosa-bebe) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--gris-suave);
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .background-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('img/fondo_bebes_sutil.png') no-repeat center center / cover;
+            opacity: 0.15; filter: blur(5px); z-index: 0;
+        }
+        .main-container {
+            background:  rgba(243, 243, 243, 0.96);
+            padding: 28px 18px 28px 18px;
+            border-radius: 22px;
+            box-shadow: 0 14px 38px rgba(0, 0, 0, 0.09);
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(3.5px);
+            -webkit-backdrop-filter: blur(3.5px);
+        }
+        /* Carrusel mejorado */
+        .carousel-container {
+            width: 310px;
+            height: 160px;
+            margin-bottom: 10px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            
+            box-shadow: 0 6px 18px rgb(22, 74, 100);
+            border: 2.5px solid var(--borde-carrusel);
+            background: rgba(255,255,255,0.84);
+        }
+        .carousel-slide {
+            width: 100%; height: 100%;
+            display: none;
+            animation: fadeIn 0.8s;
+        }
+        .carousel-slide.active {
+            display: block;
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 13px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0.7; }
+            to { opacity: 1; }
+        }
+        .main-container h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.09em;
+            margin-bottom: 13px;
+            color: var(--coral);
+            line-height: 1.13;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.06);
+        }
+        .main-container p {
+            font-size: 1.00em;
+            line-height: 1.6;
+            margin-bottom: 19px;
+            color: var(--gris-suave);
+            max-width: 460px;
+            font-weight: 500;
+        }
+        .cta-button {
+            padding: 12px 24px;
+            background: linear-gradient(45deg, var(--rosa-bebe), var(--rosa-hover));
+            color: #5a2d40;;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.05em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.28s;
+            box-shadow: 0 4px 18px rgba(255,127,80,0.20);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 14px;
+        }
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.21);
+            transform: skewX(-20deg);
+            transition: all 0.7s cubic-bezier(0.165,0.84,0.44,1);
+        }
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        .cta-button:hover {
+            background: linear-gradient(45deg, var(--rosa-hover), var(--rosa-bebe));
+            color: #4e0121;
+            transform: translateY(-2.5px) scale(1.03);
+            box-shadow: 0 7px 22px rgba(255,127,80,0.29);
+        }
+        .cta-button:active {
+            transform: translateY(0) scale(1);
+            box-shadow: 0 2px 8px rgba(255,127,80,0.14);
+        }
+        .decorative-images {
+            margin-top: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .decorative-images img {
+            width: 67px; height: 67px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 2.5px 7px rgba(0,0,0,0.08);
+            transition: transform 0.24s;
+        }
+        .decorative-images img:hover {
+            transform: scale(1.03) rotate(1.5deg);
+        }
+        /* Responsive */
+        @media (max-width: 600px) {
+            .main-container {
+                padding: 17px 2vw;
+                border-radius: 14px;
+                max-width: 98vw;
+            }
+            .carousel-container {
+                width: 148px;
+                height: 72px;
+                margin-bottom: 11px;
+                border-radius: 10px;
+            }
+            .carousel-slide img { border-radius: 8px; }
+            .main-container h1 { font-size: 1.28em; margin-bottom: 9px;}
+            .main-container p { font-size: 0.93em; margin-bottom: 13px; }
+            .cta-button { font-size: 0.98em; padding: 8px 17px; border-radius: 18px;}
+            .decorative-images { gap: 7px; margin-top: 7px;}
+            .decorative-images img { width: 44px; height: 44px; border-radius: 6px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <div class="main-container">
+        <div class="carousel-container">
+            <div class="carousel-slide active">
+                <img src="img/05.png" >
+            </div>
+            <div class="carousel-slide">
+                <img src="img/04.png" >
+            </div>
+            <div class="carousel-slide">
+                <img src="img/01.png">
+            </div>
+            <div class="carousel-slide">
+                <img src="img/02.png">
+            </div>
+            <div class="carousel-slide">
+                <img src="img/03.png">
+            </div>
+            <div class="carousel-slide">
+                <img src="img/06.png">
+            </div>
+        </div>
+        <h1>Un Viaje Mágico Comienza Aquí</h1>
+        <p>
+            Acompañamos cada latido, cada paso de tu embarazo con amor, información y el apoyo que necesitas.<br>
+            Desde el primer día hasta el nacimiento de tu bebé.
+        </p>
+        <button class="cta-button" onclick="loadMainPage()">
+            Explorar Nuestra Página
+        </button>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.carousel-slide');
+        let currentSlide = 0;
+        function showSlide(index) {
+            slides.forEach((slide, i) => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        setInterval(nextSlide, 4000);
+        document.addEventListener('DOMContentLoaded', () => showSlide(currentSlide));
+        function loadMainPage() {
+            window.location.href = "principal.html";
+        }
+    </script>
+</body>
+</html>
